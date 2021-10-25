@@ -1,0 +1,70 @@
+<div class="wrapper">
+    <div class="main-sec py-4 px-2">
+        <div class="container bg-white border px-5 py-5">
+            <div class="row">
+                <div class="col-md-12 border place-sec position-relative">
+                    <h2 class="position-absolute bg-white px-2">Place</h2>
+                    <form class="row g-3 pt-4 align-items-center pb-4 px-3">
+                        <div class="col-auto">
+                            <label for="" class="visually">Position Details</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control h-fix" id="yAxis" min="0" placeholder="Number"
+                                [(ngModel)]="onSubmitAxis.x" name="yAxis" />
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control h-fix" id="xAxis" min="0" placeholder="Number"
+                                [(ngModel)]="onSubmitAxis.y" name="xAxis" />
+                        </div>
+                        <div class="col">
+                            <select class="form-select h-fix" aria-label="Default select example" name="direction"
+                                [(ngModel)]="onSubmitNow">
+                                <option value="1">North</option>
+                                <option value="3">South</option>
+                                <option value="2">West</option>
+                                <option value="4">East</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary bg-blue h-fix w-100 border-0"
+                                (click)="submit()">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12 mt-5">
+                    <div class="d-flex mb-3">
+                        <button type="submit" (click)="changeDirection('left')"
+                            class="btn btn-primary px-4 me-2 bg-blue h-fix border-0">
+                            <em class="fas fa-chevron-left me-1"></em> Left
+                        </button>
+                        <button type="submit" (click)="changeDirection('right')"
+                            class="btn btn-primary px-4 me-2 bg-yellow h-fix border-0">
+                            Right <em class="fas fa-chevron-right ms-1"></em>
+                        </button>
+                        <button type="submit" (click)="move()" class="btn btn-primary px-4 bg-gray h-fix border-0">
+                            <em class="fal fa-expand-arrows-alt me-1"></em> Move
+                        </button>
+                    </div>
+                    <div class="grid-list">
+                        <table *ngFor="let item of rows; let i = index">
+                            <tr class="list-group list-group-horizontal text-center">
+                                <td class="col-auto px-3 h-fix">{{ item }}</td>
+                                <ng-container *ngFor="let item2 of columns; let j = index">
+                                    <td width="70" height="70" [attr.id]="item2 + '' + item"
+                                        class="list-group-item col">
+                                        &nbsp;
+                                    </td>
+                                </ng-container>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-12 value-grid mt-5 text-center border py-2 position-relative">
+                    <h2 class="position-absolute px-2">Report</h2>
+                    <div class="row px-4 pt-4 pb-2">
+                        <div class="col text-start"><strong>X : {{axis.x}}</strong></div>
+                        <div class="col text-start"><strong>Y : {{axis.y}}</strong></div>
+                        <div class="col text-start"><strong>F : {{directions[now]}}</strong></div>
+                    </div>
